@@ -28,7 +28,8 @@ Pod::Spec.new do |s|
   # Swift/Objective-C compatibility
   xcconfig = {
     'DEFINES_MODULE' => 'YES',
-    'SWIFT_COMPILATION_MODE' => 'wholemodule'
+    'SWIFT_COMPILATION_MODE' => 'wholemodule',
+    'SWIFT_OBJC_BRIDGING_HEADER' => '$(PODS_TARGET_SRCROOT)/suuqe-camera-Bridging-Header.h'
   }
 
   if barcode_scanner_enabled

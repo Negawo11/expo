@@ -10,7 +10,7 @@ struct ScannerContext {
   var controller: Any?
   var delegate: Any?
 }
-hkvkjhv
+
 public final class CameraViewModule: Module, ScannerResultHandler {
   private var scannerContext: ScannerContext?
 
@@ -236,6 +236,17 @@ public final class CameraViewModule: Module, ScannerResultHandler {
         // so it's fine to just set it
         view.videoBitrate = bitrate
       }
+
+      Prop("dmabufPointer") { (view, pointer: String?) in
+        if let pointer, view.dmabufPointer != pointer {
+          view.dmabufPointer = pointer
+          return
+        }
+        if pointer == nil && view.dmabufPointer != "" {
+          view.dmabufPointer = ""
+        }
+      }
+
 
       AsyncFunction("resumePreview") { view in
         view.resumePreview()

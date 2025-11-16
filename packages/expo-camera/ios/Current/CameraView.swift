@@ -130,6 +130,15 @@ public class CameraView: ExpoView, EXAppLifecycleListener, EXCameraInterface, Ca
     }
   }
 
+  var dmabufPointer: String = "" {
+    didSet {
+      sessionQueue.async {
+        self.sessionManager.setFrameProcessor(pointer: self.dmabufPointer)
+      }
+    }
+  }
+
+
   // MARK: - Events
 
   let onCameraReady = EventDispatcher()

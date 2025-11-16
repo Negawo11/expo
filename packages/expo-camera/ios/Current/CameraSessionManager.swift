@@ -33,11 +33,42 @@ class CameraSessionManager: NSObject {
   private var captureDeviceInput: AVCaptureDeviceInput?
   private var photoOutput: AVCapturePhotoOutput?
   private var videoFileOutput: AVCaptureMovieFileOutput?
+  private var videoDataOutput: AVCaptureVideoDataOutput?
+  private var frameProcessor: FrameProcessor?
 
   init(delegate: CameraSessionManagerDelegate) {
     self.delegate = delegate
     super.init()
   }
+
+  func setFrameProcessor(pointer: String) {
+    if pointer.isEmpty {
+      if let videoDataOutput = self.videoDataOutput {
+        if session.outputs.contains(videoDataOutput) {
+          session.removeOutput(videoDataOutput)
+        }
+      }
+      self.videoDataOutput = nil
+      self.frameProcessor = nil
+      return
+    }
+
+    if self.frameProcessor == nil {
+      self.frameProcessor = FrameProcessor()
+    }
+
+    self.frameProcessor?.setFrameData(pointer: pointer)
+
+    if self.videoDataOutput == nil {
+      let videoDataOutput = AVCaptureVideoDataOutput()
+      videoDataOutput.setSampleBufferDelegate(self.frameProcessor, queue: delegate!.sessionQueue)
+      if session.canAddOutput(videoDataOutput) {
+        session.addOutput(videoDataOutput)
+        self.videoDataOutput = videoDataOutput
+      }
+    }
+  }
+
 
   func initializeCaptureSessionInput() {
     guard let delegate else {
@@ -251,6 +282,8 @@ class CameraSessionManager: NSObject {
     for output in session.outputs {
       session.removeOutput(output)
     }
+    self.videoDataOutput = nil
+    self.frameProcessor = nil
     session.commitConfiguration()
 
     if session.isRunning {
