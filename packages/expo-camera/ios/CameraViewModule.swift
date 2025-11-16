@@ -10,7 +10,7 @@ struct ScannerContext {
   var controller: Any?
   var delegate: Any?
 }
-
+hkvkjhv
 public final class CameraViewModule: Module, ScannerResultHandler {
   private var scannerContext: ScannerContext?
 
