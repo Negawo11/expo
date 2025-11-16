@@ -21,11 +21,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/expo/expo.git",
+    "url": "https://github.com/Negawo11/expo.git",
     "directory": "packages/expo-camera"
   },
   "bugs": {
-    "url": "https://github.com/expo/expo/issues"
+    "url": "https://github.com/Negawo11/expo/issues"
   },
   "author": "650 Industries, Inc.",
   "license": "MIT",
