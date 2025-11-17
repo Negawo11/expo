@@ -34,7 +34,8 @@
     "preset": "expo-module-scripts"
   },
   "dependencies": {
-    "invariant": "^2.2.4"
+    "invariant": "^2.2.4",
+    "react-native-suuqencode": "^0.1.0"
   },
   "devDependencies": {
     "expo-module-scripts": "^5.0.7"

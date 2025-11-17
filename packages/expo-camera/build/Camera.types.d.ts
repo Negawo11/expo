@@ -295,6 +295,11 @@ export type BarcodeScanningResult = {
 export type ScanningResult = Omit<BarcodeScanningResult, 'bounds' | 'cornerPoints'>;
 export type CameraViewProps = ViewProps & {
     /**
+     * A pointer to the DMA buffer for zero-copy frames.
+     * @platform android
+     */
+    dmaBuffer?: string;
+    /**
      * Camera facing. Use one of `CameraType`. When `front`, use the front-facing camera.
      * When `back`, use the back-facing camera.
      * @default 'back'
@@ -460,6 +465,7 @@ export interface CameraViewRef {
  * @hidden
  */
 export type CameraNativeProps = {
+    dmaBuffer?: string;
     pointerEvents?: any;
     style?: any;
     ref?: Ref<CameraViewRef>;
