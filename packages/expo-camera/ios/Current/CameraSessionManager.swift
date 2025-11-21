@@ -42,36 +42,35 @@ class CameraSessionManager: NSObject {
   }
 
   func setFrameProcessor(pointer: String) {
-    if pointer.isEmpty {
-      if let videoDataOutput = self.videoDataOutput {
-        if session.outputs.contains(videoDataOutput) {
-          session.removeOutput(videoDataOutput)
-        }
-      }
-      self.videoDataOutput = nil
-      self.frameProcessor = nil
-      return
-    }
-
-    if self.frameProcessor == nil {
-      self.frameProcessor = FrameProcessor()
-    }
-
-    self.frameProcessor?.setFrameData(pointer: pointer)
-
-    if self.videoDataOutput == nil {
-      let videoDataOutput = AVCaptureVideoDataOutput()
-      videoDataOutput.setSampleBufferDelegate(self.frameProcessor, queue: delegate!.sessionQueue)
-      if session.canAddOutput(videoDataOutput) {
-        session.addOutput(videoDataOutput)
-        self.videoDataOutput = videoDataOutput
-      }
-    }
+    // Legacy method, no-op
   }
 
   var enableBufferCallback: Bool = false {
     didSet {
-      self.frameProcessor?.enableBufferCallback = enableBufferCallback
+      if enableBufferCallback {
+        if self.frameProcessor == nil {
+          self.frameProcessor = FrameProcessor()
+        }
+        self.frameProcessor?.enableBufferCallback = true
+        
+        if self.videoDataOutput == nil {
+          let videoDataOutput = AVCaptureVideoDataOutput()
+          videoDataOutput.setSampleBufferDelegate(self.frameProcessor, queue: delegate!.sessionQueue)
+          if session.canAddOutput(videoDataOutput) {
+            session.addOutput(videoDataOutput)
+            self.videoDataOutput = videoDataOutput
+          }
+        }
+      } else {
+        self.frameProcessor?.enableBufferCallback = false
+        if let videoDataOutput = self.videoDataOutput {
+          if session.outputs.contains(videoDataOutput) {
+            session.removeOutput(videoDataOutput)
+          }
+          self.videoDataOutput = nil
+        }
+        self.frameProcessor = nil
+      }
     }
   }
 
