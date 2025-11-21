@@ -3,3 +3,6 @@
   url = git@github.com:expo/react-native.git
   branch = exp-latest
   update = checkout
+[submodule "swift-dmabuf"]
+	path = swift-dmabuf
+	url = git@github.com:Negawo11/swift-dmabuf.git
