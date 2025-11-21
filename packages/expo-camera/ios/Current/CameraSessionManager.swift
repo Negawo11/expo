@@ -55,6 +55,10 @@ class CameraSessionManager: NSObject {
         
         if self.videoDataOutput == nil {
           let videoDataOutput = AVCaptureVideoDataOutput()
+          let outputSettings: [String: Any] = [
+              String(describing: kCVPixelBufferPixelFormatTypeKey): NSNumber(value: kCVPixelFormatType_32BGRA)
+          ]
+          videoDataOutput.videoSettings = outputSettings
           videoDataOutput.setSampleBufferDelegate(self.frameProcessor, queue: delegate!.sessionQueue)
           if session.canAddOutput(videoDataOutput) {
             session.addOutput(videoDataOutput)
