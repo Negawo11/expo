@@ -247,6 +247,16 @@ public final class CameraViewModule: Module, ScannerResultHandler {
         }
       }
 
+      Prop("enableBufferCallback") { (view, enable: Bool?) in
+        if let enable, view.enableBufferCallback != enable {
+          view.enableBufferCallback = enable
+          return
+        }
+        if enable == nil && view.enableBufferCallback {
+          view.enableBufferCallback = false
+        }
+      }
+
 
       AsyncFunction("resumePreview") { view in
         view.resumePreview()

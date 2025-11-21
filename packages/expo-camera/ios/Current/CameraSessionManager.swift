@@ -69,6 +69,12 @@ class CameraSessionManager: NSObject {
     }
   }
 
+  var enableBufferCallback: Bool = false {
+    didSet {
+      self.frameProcessor?.enableBufferCallback = enableBufferCallback
+    }
+  }
+
 
   func initializeCaptureSessionInput() {
     guard let delegate else {

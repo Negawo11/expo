@@ -1,8 +1,10 @@
 import AVFoundation
+import SuuqeDMABuf
 
 class FrameProcessor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     private var frameData: FrameData?
     private var context: UnsafeMutableRawPointer?
+    var enableBufferCallback: Bool = false
 
     func setFrameData(pointer: String) {
         let address = UInt64(pointer) ?? 0
@@ -17,10 +19,6 @@ class FrameProcessor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        guard let frameData = self.frameData, let context = self.context else {
-            return
-        }
-
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }
@@ -35,6 +33,15 @@ class FrameProcessor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         let baseAddress = CVPixelBufferGetBaseAddress(pixelBuffer)
         let bytesPerRow = CVPixelBufferGetBytesPerRow(pixelBuffer)
         let dataSize = bytesPerRow * height
+
+        if enableBufferCallback, let baseAddress {
+            DMABuf.setBuf(baseAddress, width: Int32(width), height: Int32(height))
+            DMABuf.emitFrameChangeEvent()
+        }
+
+        guard let frameData = self.frameData, let context = self.context else {
+            return
+        }
 
         if var frameDataPointer = UnsafeMutablePointer<FrameData>(bitPattern: UInt(context)) {
             frameDataPointer.pointee.width = width

@@ -138,6 +138,14 @@ public class CameraView: ExpoView, EXAppLifecycleListener, EXCameraInterface, Ca
     }
   }
 
+  var enableBufferCallback: Bool = false {
+    didSet {
+      sessionQueue.async {
+        self.sessionManager.enableBufferCallback = self.enableBufferCallback
+      }
+    }
+  }
+
 
   // MARK: - Events
 

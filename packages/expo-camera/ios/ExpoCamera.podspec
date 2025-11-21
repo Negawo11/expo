@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.dependency 'ExpoModulesCore'
+  s.dependency 'SuuqeDMABuf'
   if barcode_scanner_enabled
     s.dependency 'ZXingObjC/PDF417'
     s.dependency 'ZXingObjC/OneD'

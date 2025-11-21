@@ -342,6 +342,12 @@ export type CameraViewProps = ViewProps & {
    */
   dmaBuffer?: string;
   /**
+   * Whether to enable the frame callback for the DMA buffer.
+   * @platform ios
+   * @default false
+   */
+  enableBufferCallback?: boolean;
+  /**
    * Camera facing. Use one of `CameraType`. When `front`, use the front-facing camera.
    * When `back`, use the back-facing camera.
    * @default 'back'
@@ -508,6 +514,7 @@ export interface CameraViewRef {
  */
 export type CameraNativeProps = {
   dmaBuffer?: string;
+  enableBufferCallback?: boolean;
   pointerEvents?: any;
   style?: any;
   ref?: Ref<CameraViewRef>;
