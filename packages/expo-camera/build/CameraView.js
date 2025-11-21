@@ -117,6 +117,7 @@ export default class CameraView extends Component {
         enableTorch: false,
         mode: 'picture',
         flash: 'off',
+        enableBufferCallback: false,
     };
     _cameraHandle;
     _cameraRef = createRef();

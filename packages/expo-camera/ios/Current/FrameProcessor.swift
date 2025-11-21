@@ -1,6 +1,13 @@
 import AVFoundation
 import SuuqeDMABuf
 
+struct FrameData {
+    var bitmapData: UnsafeMutableRawPointer?
+    var width: Int32
+    var height: Int32
+    var callback: @convention(c) (UnsafeMutableRawPointer?, UnsafeMutablePointer<FrameData>?) -> Void
+}
+
 class FrameProcessor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     private var frameData: FrameData?
     private var context: UnsafeMutableRawPointer?
@@ -44,8 +51,8 @@ class FrameProcessor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
 
         if var frameDataPointer = UnsafeMutablePointer<FrameData>(bitPattern: UInt(context)) {
-            frameDataPointer.pointee.width = width
-            frameDataPointer.pointee.height = height
+            frameDataPointer.pointee.width = Int32(width)
+            frameDataPointer.pointee.height = Int32(height)
             
             if let bitmapData = frameDataPointer.pointee.bitmapData {
                 memcpy(bitmapData, baseAddress, dataSize)
