@@ -1,6 +1,6 @@
 {
   "name": "suuqe-camera",
-  "version": "17.0.11",
+  "version": "17.0.12",
   "description": "Forked version of expo-camera with support for frame extraction from JavaScript code",
   "main": "build/index.js",
   "types": "build/index.d.ts",
