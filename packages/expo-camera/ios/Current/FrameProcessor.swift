@@ -20,10 +20,10 @@ class FrameProcessor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
         let width = CVPixelBufferGetWidth(pixelBuffer)
         let height = CVPixelBufferGetHeight(pixelBuffer)
-        let baseAddress = CVPixelBufferGetBaseAddress(pixelBuffer)
+        let bytesPerRow = CVPixelBufferGetBytesPerRow(pixelBuffer)
 
         if let baseAddress {
-            DMABuf.setBuf(baseAddress, width: Int32(width), height: Int32(height))
+            DMABuf.setBuf(baseAddress, width: Int32(width), height: Int32(height), bytesPerRow: Int32(bytesPerRow))
             DMABuf.emitFrameChangeEvent()
         }
     }
