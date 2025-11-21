@@ -6,3 +6,6 @@
 [submodule "swift-dmabuf"]
 	path = swift-dmabuf
 	url = git@github.com:Negawo11/swift-dmabuf.git
+[submodule "react-native-suuqencode"]
+	path = react-native-suuqencode
+	url = git@github.com:Negawo11/react-native-suuqencode.git
