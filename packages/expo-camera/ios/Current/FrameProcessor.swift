@@ -21,6 +21,7 @@ class FrameProcessor: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         let width = CVPixelBufferGetWidth(pixelBuffer)
         let height = CVPixelBufferGetHeight(pixelBuffer)
         let bytesPerRow = CVPixelBufferGetBytesPerRow(pixelBuffer)
+        let baseAddress = CVPixelBufferGetBaseAddress(pixelBuffer)
 
         if let baseAddress {
             DMABuf.setBuf(baseAddress, width: Int32(width), height: Int32(height), bytesPerRow: Int32(bytesPerRow))
