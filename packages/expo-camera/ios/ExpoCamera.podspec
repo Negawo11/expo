@@ -29,7 +29,8 @@ Pod::Spec.new do |s|
   # Swift/Objective-C compatibility
   xcconfig = {
     'DEFINES_MODULE' => 'YES',
-    'SWIFT_COMPILATION_MODE' => 'wholemodule'
+    'SWIFT_COMPILATION_MODE' => 'wholemodule',
+    'OTHER_LDFLAGS' => '-weak_framework DeclaredAgeRange'
   }
 
   if barcode_scanner_enabled

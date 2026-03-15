@@ -1,7 +1,7 @@
 {
   "platforms": ["apple", "android", "web"],
   "apple": {
-    "modules": ["CameraViewModule"]
+    "modules": ["CameraViewModule", "AgeVerificationModule"]
   },
   "android": {
     "modules": ["expo.modules.camera.CameraViewModule"]

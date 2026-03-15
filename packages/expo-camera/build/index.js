@@ -1,6 +1,9 @@
 import { createPermissionHook } from 'expo-modules-core';
 import CameraManager from './ExpoCameraManager';
+export * from './AgeVerification';
+export * from './Camera.types';
 export { default as CameraView } from './CameraView';
+export * from './PictureRef';
 // @needsAudit
 /**
  * Checks user's permissions for accessing camera.
@@ -76,8 +79,6 @@ export const useMicrophonePermissions = createPermissionHook({
 export async function scanFromURLAsync(url, barcodeTypes = ['qr']) {
     return CameraManager.scanFromURLAsync(url, barcodeTypes);
 }
-export * from './Camera.types';
-export * from './PictureRef';
 /**
  * @hidden
  */

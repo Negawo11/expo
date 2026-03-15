@@ -1,6 +1,9 @@
 import { PermissionResponse } from 'expo-modules-core';
 import { BarcodeScanningResult, BarcodeType } from './Camera.types';
+export * from './AgeVerification';
+export * from './Camera.types';
 export { default as CameraView } from './CameraView';
+export * from './PictureRef';
 /**
  * Checks user's permissions for accessing camera.
  * @return A promise that resolves to an object of type [PermissionResponse](#permissionresponse).
@@ -54,8 +57,6 @@ export declare const useMicrophonePermissions: (options?: import("expo-modules-c
  * refers to the barcode type that was scanned and the data is the information encoded in the barcode.
  */
 export declare function scanFromURLAsync(url: string, barcodeTypes?: BarcodeType[]): Promise<BarcodeScanningResult[]>;
-export * from './Camera.types';
-export * from './PictureRef';
 /**
  * @hidden
  */

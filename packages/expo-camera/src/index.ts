@@ -90,6 +90,7 @@ export async function scanFromURLAsync(
   return CameraManager.scanFromURLAsync(url, barcodeTypes);
 }
 
+export * from './AgeVerification';
 export * from './Camera.types';
 export * from './PictureRef';
 
